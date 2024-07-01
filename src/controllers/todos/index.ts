@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { ITodo } from "./../../types/todo";
 import Todo from "../../models/todo";
 
+
 const getTodos = async (req: Request, res: Response): Promise<void> => {
   try {
     const todos: ITodo[] = await Todo.find();
@@ -10,6 +11,18 @@ const getTodos = async (req: Request, res: Response): Promise<void> => {
     throw error;
   }
 };
+const getTodo=async(req:Request,res:Response):Promise<void>=>{
+try {
+ 
+  const todo:ITodo[] | null= await Todo.findById(req.params.id)
+  res.send(200).json({message:"Todo return",todo:todo})
+
+
+} catch (error) {
+  throw error
+}
+
+}
 const addTodo = async (req: Request, res: Response): Promise<void> => {
   try {
     //creating an object corresponding to the database model schema
@@ -32,6 +45,23 @@ const addTodo = async (req: Request, res: Response): Promise<void> => {
     throw error;
   }
 };
+
+//creating
+const createOne=async(req:Request,res:Response):Promise<void>=>{
+try{
+  // const {params:{
+  //   id},body}=req
+
+
+const allTodos:ITodo[]= await Todo.find()
+res.status(200).json({todos:allTodos})
+}catch(error)
+  {throw error}
+}
+
+
+
+
 const updateTodo = async (req: Request, res: Response): Promise<void> => {
   try {
     const {
@@ -69,4 +99,4 @@ const deleteTodo=async(req:Request,res:Response):Promise<void>=>{
        throw error 
     }
 }
-export {getTodos,addTodo,updateTodo,deleteTodo,}
+export {getTodos,getTodo,addTodo,updateTodo,deleteTodo,}
