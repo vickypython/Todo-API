@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { ITodo } from "./../../types/todo";
 import Todo from "../../models/todo";
 
-
 const getTodos = async (req: Request, res: Response): Promise<void> => {
   try {
     const todos: ITodo[] = await Todo.find();
@@ -11,18 +10,30 @@ const getTodos = async (req: Request, res: Response): Promise<void> => {
     throw error;
   }
 };
-const getTodo=async(req:Request,res:Response):Promise<void>=>{
-try {
- 
-  const todo:ITodo[] | null= await Todo.findById(req.params.id)
-  res.send(200).json({message:"Todo return",todo:todo})
+const getTodo = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const body=req.params.id
+    const todo: ITodo[] | null = await Todo.findById(body);
+    res.send(200).json({ message: "Todo return", todo: todo });
+  } catch (error) {
+    throw error;
+  }
+};
 
 
-} catch (error) {
-  throw error
-}
+//getTodos return the using find 
+//getTodo
+//addTodo -create a new model using new keyword instead of repeat we say const body=req.body as pick<type hten use |> new({
+// name:body.name}) return the new created todo
+//update Todo-you pick the params from the url router.put('/update/todo/:id',updateTodo) omit
+//const {params:{id:_id},body}=req 
+//delete todo here you pass the id 
 
-}
+
+
+
+
+
 const addTodo = async (req: Request, res: Response): Promise<void> => {
   try {
     //creating an object corresponding to the database model schema
@@ -47,20 +58,17 @@ const addTodo = async (req: Request, res: Response): Promise<void> => {
 };
 
 //creating
-const createOne=async(req:Request,res:Response):Promise<void>=>{
-try{
-  // const {params:{
-  //   id},body}=req
+const createOne = async (req: Request, res: Response): Promise<void> => {
+  try {
+    // const {params:{
+    //   id},body}=req
 
-
-const allTodos:ITodo[]= await Todo.find()
-res.status(200).json({todos:allTodos})
-}catch(error)
-  {throw error}
-}
-
-
-
+    const allTodos: ITodo[] = await Todo.find();
+    res.status(200).json({ todos: allTodos });
+  } catch (error) {
+    throw error;
+  }
+};
 
 const updateTodo = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -83,20 +91,19 @@ const updateTodo = async (req: Request, res: Response): Promise<void> => {
     throw error;
   }
 };
-const deleteTodo=async(req:Request,res:Response):Promise<void>=>{
-    try {
-      
-      const deletedTodo:ITodo | null= await Todo.findByIdAndDelete(
-        req.params.id
-      )
-      const allTodos:ITodo[]= await Todo.find()
-      res.status(200).json({
-        message:"Todo deleted succcessful",
-        todo: deletedTodo,
-        todos: allTodos,
-      })
-    } catch (error) {
-       throw error 
-    }
-}
-export {getTodos,getTodo,addTodo,updateTodo,deleteTodo,}
+const deleteTodo = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const deletedTodo: ITodo | null = await Todo.findByIdAndDelete(
+      req.params.id
+    );
+    const allTodos: ITodo[] = await Todo.find();
+    res.status(200).json({
+      message: "Todo deleted succcessful",
+      todo: deletedTodo,
+      todos: allTodos,
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+export { getTodos, getTodo, addTodo, updateTodo, deleteTodo };
