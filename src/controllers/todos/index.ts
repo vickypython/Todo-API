@@ -10,29 +10,14 @@ const getTodos = async (req: Request, res: Response): Promise<void> => {
     throw error;
   }
 };
-const getTodo = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const body=req.params.id
-    const todo: ITodo[] | null = await Todo.findById(body);
-    res.send(200).json({ message: "Todo return", todo: todo });
-  } catch (error) {
-    throw error;
-  }
-};
 
-
-//getTodos return the using find 
+//getTodos return the using find
 //getTodo
 //addTodo -create a new model using new keyword instead of repeat we say const body=req.body as pick<type hten use |> new({
 // name:body.name}) return the new created todo
 //update Todo-you pick the params from the url router.put('/update/todo/:id',updateTodo) omit
-//const {params:{id:_id},body}=req 
-//delete todo here you pass the id 
-
-
-
-
-
+//const {params:{id:_id},body}=req
+//delete todo here you pass the id
 
 const addTodo = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -72,6 +57,8 @@ const createOne = async (req: Request, res: Response): Promise<void> => {
 
 const updateTodo = async (req: Request, res: Response): Promise<void> => {
   try {
+    // const {name,description,status}= req.body
+    // const id=parseInt(req.params.id)
     const {
       params: { id },
       body,
@@ -106,4 +93,4 @@ const deleteTodo = async (req: Request, res: Response): Promise<void> => {
     throw error;
   }
 };
-export { getTodos, getTodo, addTodo, updateTodo, deleteTodo };
+export { getTodos,addTodo, updateTodo, deleteTodo };
