@@ -41,20 +41,6 @@ const addTodo = async (req: Request, res: Response): Promise<void> => {
     throw error;
   }
 };
-
-//creating
-const createOne = async (req: Request, res: Response): Promise<void> => {
-  try {
-    // const {params:{
-    //   id},body}=req
-
-    const allTodos: ITodo[] = await Todo.find();
-    res.status(200).json({ todos: allTodos });
-  } catch (error) {
-    throw error;
-  }
-};
-
 const updateTodo = async (req: Request, res: Response): Promise<void> => {
   try {
     // const {name,description,status}= req.body
@@ -83,6 +69,7 @@ const deleteTodo = async (req: Request, res: Response): Promise<void> => {
     const deletedTodo: ITodo | null = await Todo.findByIdAndDelete(
       req.params.id
     );
+    
     const allTodos: ITodo[] = await Todo.find();
     res.status(200).json({
       message: "Todo deleted succcessful",

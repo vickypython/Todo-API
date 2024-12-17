@@ -18,4 +18,5 @@ const todoSchema = new mongoose_1.Schema({
 exports.default = (0, mongoose_1.model)("Todo", todoSchema);
 //use this model to interact with the db
 //The model in this act has the collection in mongodb
-//like tthe way you do it manually you create a db then a collection the tables in sql
+//like the way you do it manually you create a db then a collection the tables in sql
+//mongoose.model<pass the types>()

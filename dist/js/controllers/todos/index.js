@@ -24,6 +24,13 @@ const getTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getTodos = getTodos;
+//getTodos return the using find
+//getTodo
+//addTodo -create a new model using new keyword instead of repeat we say const body=req.body as pick<type hten use |> new({
+// name:body.name}) return the new created todo
+//update Todo-you pick the params from the url router.put('/update/todo/:id',updateTodo) omit
+//const {params:{id:_id},body}=req
+//delete todo here you pass the id
 const addTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         //creating an object corresponding to the database model schema
@@ -49,6 +56,8 @@ const addTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.addTodo = addTodo;
 const updateTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        // const {name,description,status}= req.body
+        // const id=parseInt(req.params.id)
         const { params: { id }, body, } = req;
         const updateTodo = yield todo_1.default.findByIdAndUpdate({ _id: id }, body);
         //return updated data to the user

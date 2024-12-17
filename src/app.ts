@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(todoRoutes);
 // const uri: string = 'mongodb://localhost:27017/myTodos'
 const MONGO_URL: string =
-  "mongodb+srv://vickymlucky:vicky@cluster0.xaqfsym.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+  `mongodb+srv://vickymlucky:${process.env.MONGO_PASSWORD}@cluster0.xaqfsym.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose
   .connect(MONGO_URL)
